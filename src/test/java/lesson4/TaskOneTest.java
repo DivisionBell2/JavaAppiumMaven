@@ -2,21 +2,19 @@ package lesson4;
 
 import lib.CoreTestCase;
 import lib.Platform;
-import lib.ui.ArticlePageObject;
-import lib.ui.MyListsPageObject;
-import lib.ui.NavigationUI;
-import lib.ui.SearchPageObject;
+import lib.ui.*;
 import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListsPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
+import lib.ui.mobile_web.MWNavigationUI;
 import org.junit.Test;
 
 public class TaskOneTest extends CoreTestCase {
 
-    //Адаптировать под iOS тест на удаление одной сохраненной статьи из двух.
-    // Вместо проверки title-элемента придумать другой способ верификации оставшейся статьи
-    // (т.е. способ убедиться, что осталась в сохраненных ожидаемая статья).
+    //Адаптировать под MW тест на удаление одной сохраненной статьи из двух. Вместо проверки
+    // title-элемента придумать другой способ верификации оставшейся статьи (т.е. способ убедиться, что осталась в
+    // сохраненных ожидаемая статья).
     @Test
     public void testSaveFirstArticleToMyList() {
         String firstSearchLine = "Java";
@@ -25,10 +23,15 @@ public class TaskOneTest extends CoreTestCase {
         String first_article_substring = "Object-oriented programming language";
         String first_article_title = "Java (programming language)";
         String second_article_title = "Python (programming language)";
+        String login = "neglavmag";
+        String password = "cnfylfhn12Ysq";
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
-        SearchPageObject.skipSettings();
+        if (Platform.getInstance().isAndroid()) {
+            SearchPageObject.skipSettings();
+        }
+
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(firstSearchLine);
         SearchPageObject.clickByArticleWithSubstring(first_article_substring);
@@ -42,34 +45,59 @@ public class TaskOneTest extends CoreTestCase {
             ArticlePageObject.addArticlesToMySaved();
         }
 
-        ArticlePageObject.closeArticle();
-        SearchPageObject.clickCancelSearch();
+        if (Platform.getInstance().isMw()) {
+            AuthorizationPageObject Auth = new AuthorizationPageObject(driver);
+
+            Auth.clickAuthButton();
+            Auth.enterLoginData(login, password);
+            Auth.submitForm();
+
+            ArticlePageObject.waitForTitleElement("first_article_substring");
+        }
+
+        if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.closeArticle();
+            SearchPageObject.clickCancelSearch();
+        }
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(secondSearchLine);
         SearchPageObject.clickByArticleWithSubstring(second_article_title);
 
         ArticlePageObject.waitForTitleElement(second_article_title);
-        ArticlePageObject.addArticleToExistedList(name_of_folder);
-        ArticlePageObject.closeArticle();
-
-        SearchPageObject.clickCancelSearch();
-        SearchPageObject.navigateToHomePage();
-
-        NavigationUI NavigationUI = NavigationUIFactory.get(driver);
-
-        NavigationUI.clickMyLists();
 
         MyListsPageObject MyListPageObject = MyListsPageObjectFactory.get(driver);
 
         if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.addArticleToExistedList(name_of_folder);
+            ArticlePageObject.closeArticle();
+
+            SearchPageObject.clickCancelSearch();
+            SearchPageObject.navigateToHomePage();
+
+            NavigationUI NavigationUI = NavigationUIFactory.get(driver);
+
+            NavigationUI.clickMyLists();
+
             MyListPageObject.openFolderByName(name_of_folder);
             MyListPageObject.swipeByArticleToDelete(first_article_title);
+            MyListPageObject.clickToSavedArticleByName(second_article_title);
+
+            ArticlePageObject.waitForTitleElement(second_article_title);
         }
 
+        if (Platform.getInstance().isMw()) {
+            ArticlePageObject.addArticlesToMySaved();
+            MWNavigationUI NavigationUI = new MWNavigationUI(driver);
 
-        MyListPageObject.clickToSavedArticleByName(second_article_title);
+            NavigationUI.openNavigation();
+            NavigationUI.clickMyLists();
 
-        ArticlePageObject.waitForTitleElement(second_article_title);
+            MyListsPageObject mwMyListPageObject = MyListsPageObjectFactory.get(driver);
+
+            mwMyListPageObject.swipeByArticleToDelete(first_article_title);
+            mwMyListPageObject.clickToSavedArticleByName(second_article_title);
+            ArticlePageObject.waitForTitleElement(second_article_title);
+        }
     }
 }
