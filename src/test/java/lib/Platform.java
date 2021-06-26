@@ -43,7 +43,7 @@ public class Platform {
         }
     }
 
-    public boolean isAndroid() {
+    public static boolean isAndroid() {
         return isPlatform(PLATFORM_ANDROID);
     }
 
@@ -55,7 +55,7 @@ public class Platform {
         return isPlatform(PLATFORM_MOBILE_WEB);
     }
 
-    public String getPlatformVar() {
+    public static String getPlatformVar() {
         //return "android";
         return "mobile_web";
     }
@@ -101,8 +101,8 @@ public class Platform {
         return capabilities;
     }
 
-    private boolean isPlatform(String my_platform) {
-        String platform = this.getPlatformVar();
+    private static boolean isPlatform(String my_platform) {
+        String platform = Platform.getPlatformVar();
         return my_platform.equals(platform);
     }
 

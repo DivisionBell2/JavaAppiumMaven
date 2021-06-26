@@ -11,7 +11,9 @@ import tests.*;
         CheckAppConditionTests.class,
         GetStartedTest.class,
         MyListsTest.class,
-        SearchTests.class
+        SearchTests.class,
+        lesson9.TaskOneTest.class,
+        lesson9.TaskTwoTest.class,
 })
 
 public class TestSuite {

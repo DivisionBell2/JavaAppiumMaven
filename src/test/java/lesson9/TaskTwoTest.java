@@ -1,17 +1,24 @@
 package lesson9;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.SearchPageObjectFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
 
 public class TaskTwoTest extends CoreTestCase {
 
-    // Адаптировать по MW тест на поиск и верификацию трех результатов выдачи поиска.
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("Search by title and description")
+    @Description("We search the result equals by title and description and amount of search result is not less then three")
+    @Step("Start testSearchByTitleAndDescription")
+    @Severity(SeverityLevel.MINOR)
     public void testSearchByTitleAndDescription() {
         String searchTitle = "Pink Floyd album";
         String searchDescription = "album by Pink Floyd";
@@ -34,10 +41,8 @@ public class TaskTwoTest extends CoreTestCase {
             SearchPageObject.waitForElementByTitleAndDescription(mwSearchTitle, mwSearchDescription);
         }
 
-
-
         List<String> articlesTitles = SearchPageObject.getArticleListBySearch();
 
-        assertTrue(articlesTitles.size() >= 3);
+        Assert.assertTrue(articlesTitles.size() >= 3);
     }
 }

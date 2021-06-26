@@ -2,16 +2,22 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
+import io.qameta.allure.Attachment;
 import lib.Platform;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -76,9 +82,9 @@ public class MainPageObject {
             int end_y = (int) (size.height * 0.2);
 
             action
-                    .press(x, start_y)
-                    .waitAction(timeOfSwipe)
-                    .moveTo(x, end_y)
+                    .press(PointOption.point(x, start_y))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(timeOfSwipe)))
+                    .moveTo(PointOption.point(x, end_y))
                     .release()
                     .perform()
             ;
@@ -174,7 +180,7 @@ public class MainPageObject {
             int point_to_click_y = middle_y;
 
             TouchAction action = new TouchAction((AppiumDriver) driver);
-            action.tap(poit_to_click_x, point_to_click_y).perform();
+            action.tap(PointOption.point(poit_to_click_x, point_to_click_y)).perform();
         } else {
             System.out.println("Method swipeUp() do nothing for platform " + Platform.getInstance().getPlatformVar());
         }
@@ -194,14 +200,14 @@ public class MainPageObject {
             int middle_y = (upper_y + lower_y) / 2;
 
             TouchAction action = new TouchAction((AppiumDriver) driver);
-            action.press(right_x, middle_y);
-            action.waitAction(300);
+            action.press(PointOption.point(right_x, middle_y));
+            action.waitAction(WaitOptions.waitOptions(Duration.ofMillis(300)));
 
             if (Platform.getInstance().isAndroid()) {
-                action.moveTo(left_x, middle_y);
+                action.moveTo(PointOption.point(left_x, middle_y));
             } else {
                 int offset_x = (-1 * element.getSize().getWidth());
-                action.moveTo(offset_x, 0);
+                action.moveTo(PointOption.point(offset_x, 0));
             }
 
             action.release();
@@ -303,5 +309,33 @@ public class MainPageObject {
         } else {
             throw new IllegalArgumentException("Cannot get type of locator. Locator: " + locator_with_type);
         }
+    }
+
+    public String takeScreenshot(String name) {
+        TakesScreenshot ts = (TakesScreenshot) this.driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        String path = System.getProperty("user.dir") + "/" + name + "_screenshot.png";
+
+        try {
+            FileUtils.copyFile(source, new File(path));
+            System.out.println("The screenshot was taken: " + path);
+        } catch (Exception e) {
+            System.out.println("Cannot take screenshot. Error: " + e.getMessage());
+        }
+
+        return path;
+    }
+
+    @Attachment
+    public static byte[] screenshot(String path) {
+        byte[] bytes = new byte[0];
+
+        try {
+            bytes = Files.readAllBytes(Paths.get(path));
+        } catch (IOException e) {
+            System.out.println("Cannot get bytes from screenshot. Error: " + e.getMessage());
+        }
+
+        return bytes;
     }
 }

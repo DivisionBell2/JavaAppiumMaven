@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -33,18 +34,22 @@ public abstract class ArticlePageObject extends MainPageObject {
     }
     /* TEMPLATE METHODS */
 
+    @Step("Waiting for title on the article page")
     public WebElement waitForTitleElement(String substring) {
         String article_result_xpath = getArticleElement(substring);
         return this.waitForElementPresent(article_result_xpath, "Cannot find article title on page with substring" + substring, 15);
     }
 
+    @Step("Waiting for title element without waiting on the article page")
     public void waitForTitleElementWithoutWaiting(String substring) {
         String article_result_xpath = getArticleElement(substring);
         this.checkElementPresent(article_result_xpath);
     }
 
+    @Step("Get article title")
     public String getArticleTitle(String substring) {
         String title_element = getArticleElement(substring);
+        //screenshot(this.takeScreenshot("article_title"));
         return this.waitForElementAndGetAttribute(
                 title_element,
                 "content-desc",
@@ -54,6 +59,7 @@ public abstract class ArticlePageObject extends MainPageObject {
         );
     }
 
+    @Step("Swiping to footer on article page")
     public void swipeToFooter() {
         if (Platform.getInstance().isAndroid()) {
             this.swipeUpToFindElement(FOOTER_ELEMENT,
@@ -75,6 +81,7 @@ public abstract class ArticlePageObject extends MainPageObject {
 
     }
 
+    @Step("Adding the article to my list")
     public void addArticleToMyList(String name_of_folder) {
         this.waitForElementAndClick(
                 SAVE_BUTTON,
@@ -102,6 +109,7 @@ public abstract class ArticlePageObject extends MainPageObject {
         );
     }
 
+    @Step("Adding the article in list '{name_of_folder}'")
     public void addArticleToExistedList(String name_of_folder) {
         this.waitForElementAndClick(
                 SAVE_BUTTON,
@@ -123,6 +131,7 @@ public abstract class ArticlePageObject extends MainPageObject {
         );
     }
 
+    @Step("Adding the article to my saved articles")
     public void addArticlesToMySaved() {
 
         if (Platform.getInstance().isMw()) {
@@ -132,6 +141,7 @@ public abstract class ArticlePageObject extends MainPageObject {
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
     }
 
+    @Step("Removing the article from saved if it has been added")
     public void removeArticleFromSavedIfItAdded() {
         if (this.isElementPresent(OPTIONS_REMOVE_FROM_MY_LIST_BUTTON)) {
             this.waitForElementAndClick(
@@ -147,6 +157,7 @@ public abstract class ArticlePageObject extends MainPageObject {
         }
     }
 
+    @Step("Closing the article")
     public void closeArticle() {
         if (Platform.getInstance().isAndroid()) {
             this.waitForElementAndClick(

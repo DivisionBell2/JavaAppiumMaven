@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -28,6 +29,7 @@ public abstract class MyListsPageObject extends MainPageObject {
         super(driver);
     }
 
+    @Step("Opening the folder named '{name_of_folder}'")
     public void openFolderByName(String name_of_folder) {
         String folder_name_xpath = getFolderXpathByName(name_of_folder);
 
@@ -38,6 +40,7 @@ public abstract class MyListsPageObject extends MainPageObject {
         );
     }
 
+    @Step("Waiting for article with title '{article_title}'")
     public void waitForArticleToAppearByTitle(String article_title) {
         String article_title_xpath = getSavedArticleXpathByTitle(article_title);
         this.waitForElementPresent(
@@ -47,6 +50,7 @@ public abstract class MyListsPageObject extends MainPageObject {
         );
     }
 
+    @Step("Clicking on save button for saving the article '{article_title}'")
     public void clickToSavedArticleByName(String article_title) {
         String article_title_xpath = getSavedArticleXpathByTitle(article_title);
         this.waitForElementAndClick(
@@ -56,6 +60,7 @@ public abstract class MyListsPageObject extends MainPageObject {
         );
     }
 
+    @Step("Swiping left one the article list for deleting the article '{article_title}'")
     public void swipeByArticleToDelete(String article_title) {
         String article_title_xpath = getSavedArticleXpathByTitle(article_title);
         this.waitForElementPresent(article_title_xpath, "Cannot find saved article in list");
@@ -83,6 +88,7 @@ public abstract class MyListsPageObject extends MainPageObject {
         }
     }
 
+    @Step("Waiting that article list does not have articles")
     public void waitForNoArticles() {
         this.waitForElementPresent(
                 NOT_ARTICLES_MESSAGE,

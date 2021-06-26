@@ -2,6 +2,8 @@ package lesson4;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +41,11 @@ public class TaskThreeTest {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "Authorization"), @Feature(value = "Navigation"), @Feature(value = "My lists")})
+    @DisplayName("First test")
+    @Description("This test is the first and was not refactored (it was saved for history)")
+    @Step("Start firstTest")
+    @Severity(SeverityLevel.TRIVIAL)
     public void firstTest() {
         waitForElementAndClick(
                 By.xpath("//*[contains(@text, 'SKIP')]"),

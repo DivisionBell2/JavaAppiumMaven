@@ -3,6 +3,7 @@ package lesson3;
 import lib.CoreTestCase;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.SearchPageObjectFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class TaskThreeTest extends CoreTestCase {
         List<String> articlesTitles = SearchPageObject.getArticleListBySearch();
 
         for (String articleTitle : articlesTitles) {
-            assertTrue(articleTitle.toLowerCase().contains(keyWord.toLowerCase()));
+            Assert.assertTrue(articleTitle.toLowerCase().contains(keyWord.toLowerCase()));
         }
     }
 }
