@@ -10,11 +10,6 @@ import org.junit.Test;
 public class GetStartedTest extends CoreTestCase {
 
     @Test
-    @Features(value = {@Feature(value = "Start settings")})
-    @DisplayName("Pass through welcome")
-    @Description("We pass all settings before start work with application")
-    @Step("Start testPassThroughWelcome")
-    @Severity(SeverityLevel.NORMAL)
     public void testPassThroughWelcome() {
 
 

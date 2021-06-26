@@ -41,11 +41,6 @@ public class TaskThreeTest {
     }
 
     @Test
-    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "Authorization"), @Feature(value = "Navigation"), @Feature(value = "My lists")})
-    @DisplayName("First test")
-    @Description("This test is the first and was not refactored (it was saved for history)")
-    @Step("Start firstTest")
-    @Severity(SeverityLevel.TRIVIAL)
     public void firstTest() {
         waitForElementAndClick(
                 By.xpath("//*[contains(@text, 'SKIP')]"),

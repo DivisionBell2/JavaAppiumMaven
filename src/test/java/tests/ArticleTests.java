@@ -14,11 +14,6 @@ import org.junit.Test;
 @Epic("Tests for articles")
 public class ArticleTests extends CoreTestCase {
     @Test
-    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article")})
-    @DisplayName("Compare article title with expected one")
-    @Description("We open 'Java Object-oriented programming language' article and make sure the title is expected")
-    @Step("Start tesCompareArticleTitle")
-    @Severity(value = SeverityLevel.BLOCKER)
     public void testCompareArticleTitle() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -45,11 +40,6 @@ public class ArticleTests extends CoreTestCase {
     }
 
     @Test
-    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article")})
-    @DisplayName("Swipe article to the footer")
-    @Description("We open an article and swipe it to the footer")
-    @Step("Start testSwipeArticleTitle")
-    @Severity(SeverityLevel.MINOR)
     public void testSwipeArticleTitle() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
