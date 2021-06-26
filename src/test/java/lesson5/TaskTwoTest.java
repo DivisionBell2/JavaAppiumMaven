@@ -14,6 +14,11 @@ import java.util.List;
 public class TaskTwoTest extends CoreTestCase {
 
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("Search by title and description")
+    @Description("We search the result equals by title and description and amount of search result is not less then three")
+    @Step("Start testSearchByTitleAndDescription")
+    @Severity(SeverityLevel.MINOR)
     public void testSearchByTitleAndDescription() {
         String searchTitle = "Pink Floyd album";
         String searchDescription = "album by Pink Floyd";

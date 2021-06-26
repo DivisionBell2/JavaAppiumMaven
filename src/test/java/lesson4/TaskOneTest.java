@@ -15,6 +15,11 @@ import org.junit.Test;
 public class TaskOneTest extends CoreTestCase {
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "Authorization"), @Feature(value = "Navigation"), @Feature(value = "My lists")})
+    @DisplayName("Save first article to my list")
+    @Description("We save two articles in my list, then delete first article and check that second article exists in list")
+    @Step("Start testSaveFirstArticleToMyList")
+    @Severity(SeverityLevel.NORMAL)
     public void testSaveFirstArticleToMyList() {
         String firstSearchLine = "Java";
         String secondSearchLine = "Python";

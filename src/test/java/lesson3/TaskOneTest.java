@@ -11,6 +11,11 @@ import org.junit.Test;
 public class TaskOneTest extends CoreTestCase {
 
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("Check text")
+    @Description("We check that search input has text 'Search Wikipedia'")
+    @Step("Start testSearchText")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testCheckText() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 

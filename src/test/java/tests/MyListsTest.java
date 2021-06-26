@@ -20,6 +20,11 @@ public class MyListsTest extends CoreTestCase {
     password = "cnfylfhn12Ysq";
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "Authorization"), @Feature(value = "Navigation"), @Feature(value = "My lists")})
+    @DisplayName("Save first article to my list")
+    @Description("We save article in bookmark list and check it")
+    @Step("Start testSaveFirstArticleToMyList")
+    @Severity(SeverityLevel.CRITICAL)
     public void testSaveFirstArticleToMyList() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 

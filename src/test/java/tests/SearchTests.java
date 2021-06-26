@@ -12,6 +12,11 @@ import org.junit.Test;
 public class SearchTests extends CoreTestCase {
 
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("Search")
+    @Description("We search by word 'Java'")
+    @Step("Start testSearch")
+    @Severity(SeverityLevel.BLOCKER)
     public void testSearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -25,6 +30,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("Cancel Search")
+    @Description("We cancel search and go away from search page")
+    @Step("Start testCancelSearch")
+    @Severity(SeverityLevel.CRITICAL)
     public void testCancelSearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -40,6 +50,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("Amount of not empty search")
+    @Description("We check that amount of search result is more then zero")
+    @Step("Start testAmountOfNotEmptySearch")
+    @Severity(SeverityLevel.CRITICAL)
     public void testAmountOfNotEmptySearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -59,6 +74,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("Amount of empty search")
+    @Description("We check that amount of search result is equal by zero")
+    @Step("Start testAmountOfEmptySearch")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testAmountOfEmptySearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 

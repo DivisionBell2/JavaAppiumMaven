@@ -13,6 +13,11 @@ import java.util.List;
 public class TaskThreeTest extends CoreTestCase {
 
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("Check search has expected word")
+    @Description("We check that all search results have expected word")
+    @Step("Start CheckSearchHasExpectedWord")
+    @Severity(SeverityLevel.NORMAL)
     public void testCheckSearchHasExpectedWord() {
         String keyWord = "Java";
 
