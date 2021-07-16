@@ -1,4 +1,4 @@
-###### **JAVA MOBILE AUTOTEST FRAMEWORK**
+**JAVA MOBILE AUTOTEST FRAMEWORK**
 
 This is a tutorial repository that includes autotests for Wikipedia.
 
