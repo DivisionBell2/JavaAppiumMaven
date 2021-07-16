@@ -1,4 +1,4 @@
-package lesson9;
+package tests.lesson5;
 
 import io.qameta.allure.*;
 import io.qameta.allure.junit4.DisplayName;

@@ -1,4 +1,4 @@
-package lesson4;
+package tests.lesson4;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;

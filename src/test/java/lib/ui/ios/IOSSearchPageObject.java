@@ -11,7 +11,6 @@ public class IOSSearchPageObject extends SearchPageObject {
         SEARCH_INIT_ELEMENT = "xpath://XCUIElementTypeSearchField[@name='Search Wikipedia']";
         SEARCH_CANCEL_BUTTON = "id:Close";
         SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://XCUIElementTypeLink[contains(@name, '{SUBSTRING}')]";
-        // Предполагаемый xpath для iOS
         SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://XCUIElementTypeLink[contains(@text, '{SUBSTRING1}') and contains(@text, '{SUBSTRING2}')]";
         TITLE_ELEMENT = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title']";
         GO_TO_HOME_PAGE_BUTTON = "xpath://*[@class='android.widget.ImageButton']";

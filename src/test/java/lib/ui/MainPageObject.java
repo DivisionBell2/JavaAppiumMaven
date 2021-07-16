@@ -238,20 +238,6 @@ public class MainPageObject {
         }
 
         this.waitForElementAndClick(locator, error_message, 1);
-
-        // Не работает
-//            try {
-//                this.waitForElementAndClick(locator, error_message, 1);
-//                Thread.sleep(1000);
-//                need_more_attempts = false;
-//            } catch (Exception e) {
-//                if (current_attempts > amount_of_attempts) {
-//                    this.waitForElementAndClick(locator, error_message, 1);
-//                }
-//            }
-//
-//            ++ current_attempts;
-//        }
     }
 
     public void assertElementNotPresent(String locator, String error_message) {

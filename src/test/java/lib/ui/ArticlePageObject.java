@@ -49,7 +49,6 @@ public abstract class ArticlePageObject extends MainPageObject {
     @Step("Get article title")
     public String getArticleTitle(String substring) {
         String title_element = getArticleElement(substring);
-        //screenshot(this.takeScreenshot("article_title"));
         return this.waitForElementAndGetAttribute(
                 title_element,
                 "content-desc",

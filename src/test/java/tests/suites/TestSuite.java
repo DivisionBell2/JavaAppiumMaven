@@ -12,8 +12,8 @@ import tests.*;
         GetStartedTest.class,
         MyListsTest.class,
         SearchTests.class,
-        lesson9.TaskOneTest.class,
-        lesson9.TaskTwoTest.class,
+        tests.lesson9.TaskOneTest.class,
+        tests.lesson9.TaskTwoTest.class,
 })
 
 public class TestSuite {

@@ -64,6 +64,5 @@ public class ArticleTests extends CoreTestCase {
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
 
         ArticlePageObject.waitForTitleElement("Appium");
-        //ArticlePageObject.swipeToFooter();
     }
 }
